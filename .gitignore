@@ -1,0 +1,17 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Ignore variable files if they contain secrets
+# *.tfvars
+
+# IDE
+.vscode/
+
+# Windows
+Thumbs.db
+
+# macOS
+.DS_Store
