@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-This project provisions AWS infrastructure using reusable Terraform modules.
+This project provisions AWS infrastructure on AWS using reusable Terraform modules.
 
-The infrastructure is organized into reusable modules and separate environments (Development and Production).
+The infrastructure is organized into reusable modules and separate environments for Development and Production following Infrastructure as Code (IaC) best practices.
 
 ---
 
@@ -13,9 +13,9 @@ The infrastructure is organized into reusable modules and separate environments 
 ```
                 Internet
                     |
-             Application Load Balancer
+         Application Load Balancer
                     |
-              ECS Fargate Service
+            ECS Fargate Service
                     |
              PostgreSQL RDS Database
 ```
@@ -26,21 +26,25 @@ The infrastructure is organized into reusable modules and separate environments 
 
 ```
 devops-assessment/
-│
-├── README.md
+├── .github/
+│   └── workflows/
+│       └── terraform.yml
+├── infra/
+│   ├── envs/
+│   │   ├── dev/
+│   │   └── prod/
+│   └── modules/
+│       ├── network/
+│       ├── security/
+│       ├── alb/
+│       ├── ecs/
+│       └── rds/
+├── migrations/
+├── scripts/
+├── seed/
+├── docker-compose.yml
 ├── .gitignore
-│
-└── infra/
-    ├── modules/
-    │   ├── network/
-    │   ├── security/
-    │   ├── alb/
-    │   ├── ecs/
-    │   └── rds/
-    │
-    └── envs/
-        ├── dev/
-        └── prod/
+└── README.md
 ```
 
 ---
@@ -59,7 +63,7 @@ devops-assessment/
 - ECS Security Group
 - RDS Security Group
 
-### ALB
+### Application Load Balancer (ALB)
 - Application Load Balancer
 - Target Group
 - HTTP Listener
@@ -68,8 +72,8 @@ devops-assessment/
 - ECS Cluster
 - Task Definition
 - ECS Service
-- CloudWatch Logs
-- IAM Role
+- CloudWatch Log Group
+- IAM Execution Role
 
 ### RDS
 - PostgreSQL Database
@@ -79,17 +83,19 @@ devops-assessment/
 
 ## Environments
 
+Two separate environments are provided:
+
 - Development (`infra/envs/dev`)
 - Production (`infra/envs/prod`)
 
-Each environment has its own:
+Each environment contains:
 
-- provider.tf
-- backend.tf
-- variables.tf
-- terraform.tfvars
-- outputs.tf
-- main.tf
+- `provider.tf`
+- `backend.tf`
+- `main.tf`
+- `variables.tf`
+- `terraform.tfvars`
+- `outputs.tf`
 
 ---
 
@@ -97,36 +103,38 @@ Each environment has its own:
 
 - Terraform
 - AWS CLI
-- AWS IAM User
-- AWS Credentials configured
+- AWS Account
+- Configured AWS Credentials
 
 ---
 
-## Initialize Terraform
+## Commands
+
+Initialize Terraform
 
 ```bash
 terraform init
 ```
 
-## Validate
+Validate configuration
 
 ```bash
 terraform validate
 ```
 
-## Preview Infrastructure
+Preview infrastructure
 
 ```bash
 terraform plan
 ```
 
-## Deploy Infrastructure
+Deploy infrastructure
 
 ```bash
 terraform apply
 ```
 
-## Destroy Infrastructure
+Destroy infrastructure
 
 ```bash
 terraform destroy
@@ -136,8 +144,8 @@ terraform destroy
 
 ## Features
 
-- Reusable Terraform Modules
-- Multi-Environment Support
+- Modular Terraform Architecture
+- Multi-Environment Support (Dev & Prod)
 - ECS Fargate
 - Application Load Balancer
 - PostgreSQL RDS
@@ -151,10 +159,10 @@ terraform destroy
 
 This repository was created as part of a DevOps Terraform Assessment.
 
-The infrastructure was validated using:
+The infrastructure configuration was verified using:
 
-- terraform validate
-- terraform plan
+- `terraform validate`
+- `terraform plan`
 
 AWS resources were **not applied** to avoid unnecessary cloud charges.
 
