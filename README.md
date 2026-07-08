@@ -1,24 +1,39 @@
-# DevOps Assessment - Terraform AWS Infrastructure
+# DevOps Assessment – Terraform AWS Infrastructure
 
 ## Project Overview
 
-This project provisions AWS infrastructure on AWS using reusable Terraform modules.
+This project provisions AWS infrastructure using reusable Terraform modules following Infrastructure as Code (IaC) best practices.
 
-The infrastructure is organized into reusable modules and separate environments for Development and Production following Infrastructure as Code (IaC) best practices.
+The infrastructure is designed with a modular architecture and supports separate Development and Production environments for better scalability, maintainability, and reusability.
 
 ---
 
 ## Architecture
 
 ```
-                Internet
-                    |
-         Application Load Balancer
-                    |
-            ECS Fargate Service
-                    |
-             PostgreSQL RDS Database
+                   Internet
+                       │
+          Application Load Balancer
+                       │
+             ECS Fargate Service
+                       │
+            PostgreSQL RDS Database
 ```
+
+---
+
+## AWS Services Used
+
+- Amazon VPC
+- Public & Private Subnets
+- Internet Gateway
+- Route Tables
+- Security Groups
+- Application Load Balancer (ALB)
+- Amazon ECS Fargate
+- Amazon RDS PostgreSQL
+- CloudWatch Logs
+- IAM Roles
 
 ---
 
@@ -49,92 +64,91 @@ devops-assessment/
 
 ---
 
-## Modules
+## Terraform Modules
 
-### Network
-- VPC
-- Public Subnets
-- Private Subnets
-- Internet Gateway
-- Route Tables
-
-### Security
-- ALB Security Group
-- ECS Security Group
-- RDS Security Group
-
-### Application Load Balancer (ALB)
-- Application Load Balancer
-- Target Group
-- HTTP Listener
-
-### ECS
-- ECS Cluster
-- Task Definition
-- ECS Service
-- CloudWatch Log Group
-- IAM Execution Role
-
-### RDS
-- PostgreSQL Database
-- DB Subnet Group
+| Module | Purpose |
+|---------|---------|
+| Network | Creates VPC, Public & Private Subnets, Internet Gateway and Route Tables |
+| Security | Creates Security Groups for ALB, ECS and RDS |
+| ALB | Creates Application Load Balancer, Target Group and Listener |
+| ECS | Creates ECS Cluster, Task Definition, Service, IAM Role and CloudWatch Log Group |
+| RDS | Creates PostgreSQL Database and DB Subnet Group |
 
 ---
 
 ## Environments
 
-Two separate environments are provided:
+Two independent environments are configured:
 
 - Development (`infra/envs/dev`)
 - Production (`infra/envs/prod`)
 
 Each environment contains:
 
-- `provider.tf`
-- `backend.tf`
-- `main.tf`
-- `variables.tf`
-- `terraform.tfvars`
-- `outputs.tf`
+- provider.tf
+- backend.tf
+- main.tf
+- variables.tf
+- terraform.tfvars
+- outputs.tf
 
 ---
 
 ## Prerequisites
 
-- Terraform
+- Terraform >= 1.5
 - AWS CLI
 - AWS Account
 - Configured AWS Credentials
 
 ---
 
-## Commands
+## Deployment Steps
 
-Initialize Terraform
+### Clone Repository
+
+```bash
+git clone https://github.com/rishika-patel-1/devops-assessment.git
+cd devops-assessment
+```
+
+### Navigate to Environment
+
+```bash
+cd infra/envs/dev
+```
+
+### Initialize Terraform
 
 ```bash
 terraform init
 ```
 
-Validate configuration
+### Format Terraform Code
+
+```bash
+terraform fmt -recursive
+```
+
+### Validate Configuration
 
 ```bash
 terraform validate
 ```
 
-Preview infrastructure
+### Preview Infrastructure
 
 ```bash
 terraform plan
 ```
 
-Deploy infrastructure
+### Deploy Infrastructure
 
 ```bash
 terraform apply
 ```
 
-Destroy infrastructure
+### Destroy Infrastructure
 
 ```bash
 terraform destroy
@@ -145,29 +159,55 @@ terraform destroy
 ## Features
 
 - Modular Terraform Architecture
-- Multi-Environment Support (Dev & Prod)
-- ECS Fargate
-- Application Load Balancer
-- PostgreSQL RDS
-- CloudWatch Logging
-- Security Groups
 - Infrastructure as Code (IaC)
+- Multi-Environment Support (Development & Production)
+- ECS Fargate Deployment
+- Application Load Balancer
+- PostgreSQL RDS Database
+- CloudWatch Logging
+- Secure Networking
+- Security Groups
+- Reusable Terraform Modules
 
 ---
 
-## Notes
+## Validation
 
-This repository was created as part of a DevOps Terraform Assessment.
+The Terraform configuration has been verified using:
 
-The infrastructure configuration was verified using:
+- terraform fmt
+- terraform validate
+- terraform plan
 
-- `terraform validate`
-- `terraform plan`
+The infrastructure configuration is deployment-ready.
 
-AWS resources were **not applied** to avoid unnecessary cloud charges.
+To avoid unnecessary AWS charges, cloud resources were intentionally not created using `terraform apply`.
+
+---
+
+## Assumptions
+
+- AWS CLI is configured with valid credentials.
+- Terraform version 1.5 or above is installed.
+- AWS Region is configured appropriately.
+- Required IAM permissions are available.
+
+---
+
+## Future Enhancements
+
+- HTTPS using AWS Certificate Manager (ACM)
+- Auto Scaling for ECS Services
+- Remote Terraform Backend using S3 and DynamoDB
+- GitHub Actions CI/CD Deployment
+- CloudWatch Monitoring and Alarms
 
 ---
 
 ## Author
 
 **Rishika Patel**
+
+DevOps Engineer
+
+GitHub: https://github.com/rishika-patel-1

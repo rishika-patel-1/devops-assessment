@@ -3,13 +3,26 @@
 *.tfstate
 *.tfstate.*
 crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
 
 # Terraform variable files
 *.tfvars
+*.tfvars.json
 !terraform.tfvars.example
 
-# Terraform lock file (optional)
-# .terraform.lock.hcl
+# Terraform lock file
+.terraform.lock.hcl
+
+# AWS Credentials
+*.pem
+*.key
+
+# Environment files
+.env
+.env.*
 
 # IDE
 .vscode/
