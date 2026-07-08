@@ -4,14 +4,16 @@
 *.tfstate.*
 crash.log
 
-# Ignore variable files if they contain secrets
-# *.tfvars
+# Terraform variable files
+*.tfvars
+!terraform.tfvars.example
+
+# Terraform lock file (optional)
+# .terraform.lock.hcl
 
 # IDE
 .vscode/
 
-# Windows
-Thumbs.db
-
-# macOS
+# OS
 .DS_Store
+Thumbs.db
