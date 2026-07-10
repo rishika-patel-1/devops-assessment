@@ -30,3 +30,30 @@ override.tf.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Backup files
+backups/*
+!backups/.gitkeep
+
+# Logs
+*.log
+
+# Docker
+.dockerignore.local
+
+# Temporary files
+test.txt
+
+# Python cache
+.pytest_cache/
+
+# Mac/Linux temp
+*.swp
