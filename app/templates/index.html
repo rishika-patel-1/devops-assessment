@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Booking Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>Hotel Booking Dashboard</h1>
+      <p>PostgreSQL reliability and query optimization demo</p>
+    </div>
+
+    <span id="health-status" class="status">Checking database...</span>
+  </header>
+
+  <main class="container">
+    <section class="cards">
+      <article class="card">
+        <h2>Total Bookings</h2>
+        <p id="total-bookings">0</p>
+      </article>
+
+      <article class="card">
+        <h2>Total Amount</h2>
+        <p id="total-amount">₹0</p>
+      </article>
+
+      <article class="card">
+        <h2>Confirmed</h2>
+        <p id="confirmed-bookings">0</p>
+      </article>
+
+      <article class="card">
+        <h2>Pending</h2>
+        <p id="pending-bookings">0</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <h2>Hotel Bookings</h2>
+          <p>Filter bookings by city and status.</p>
+        </div>
+
+        <div class="filters">
+          <select id="city-filter">
+            <option value="">All cities</option>
+            <option value="delhi">Delhi</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="pune">Pune</option>
+            <option value="indore">Indore</option>
+            <option value="bengaluru">Bengaluru</option>
+            <option value="hyderabad">Hyderabad</option>
+          </select>
+
+          <select id="status-filter">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="completed">Completed</option>
+          </select>
+
+          <button id="refresh-button">Refresh</button>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Hotel</th>
+              <th>City</th>
+              <th>Status</th>
+              <th>Amount</th>
+              <th>Check-in</th>
+              <th>Created</th>
+            </tr>
+          </thead>
+          <tbody id="booking-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <h2>Delhi: Last 30 Days</h2>
+          <p>Optimized aggregation query result.</p>
+        </div>
+
+        <button id="report-button">Load report</button>
+      </div>
+
+      <pre id="report-output">Click “Load report” to fetch the report.</pre>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
