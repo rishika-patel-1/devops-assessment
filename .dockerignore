@@ -1,0 +1,13 @@
+.git
+.github
+infra
+**/.terraform
+*.tfstate
+*.tfstate.*
+README.md
+docker-compose.yml
+test.txt
+__pycache__
+*.pyc
+.env
+backups

@@ -1,11 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-DB_NAME="appdb"
-DB_USER="postgres"
-BACKUP_FILE="backup.sql"
+set -euo pipefail
 
-echo "Starting PostgreSQL backup..."
+DB_CONTAINER="${DB_CONTAINER:-hotel-postgres}"
+DB_NAME="${DB_NAME:-hotel_booking_db}"
+DB_USER="${DB_USER:-postgres}"
+BACKUP_DIR="${BACKUP_DIR:-./backups}"
 
-pg_dump -U $DB_USER $DB_NAME > $BACKUP_FILE
+mkdir -p "$BACKUP_DIR"
 
-echo "Backup completed: $BACKUP_FILE"
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+BACKUP_FILE="$BACKUP_DIR/hotel_booking_${TIMESTAMP}.sql"
+
+docker exec "$DB_CONTAINER" \
+  pg_dump \
+  -U "$DB_USER" \
+  -d "$DB_NAME" \
+  --clean \
+  --if-exists \
+  > "$BACKUP_FILE"
+
+echo "Backup created: $BACKUP_FILE"

@@ -1,5 +1,7 @@
+# =========================
 # Terraform
-.terraform/
+# =========================
+**/.terraform/*
 *.tfstate
 *.tfstate.*
 crash.log
@@ -7,26 +9,81 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+*.tfplan
 
 # Terraform variable files
 *.tfvars
 *.tfvars.json
 !terraform.tfvars.example
 
-# Terraform lock file
-.terraform.lock.hcl
-
+# =========================
 # AWS Credentials
+# =========================
 *.pem
 *.key
 
-# Environment files
+# =========================
+# Environment Variables
+# =========================
 .env
 .env.*
+!.env.example
 
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+.venv/
+venv/
+env/
+ENV/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
 # IDE
+# =========================
 .vscode/
+.idea/
 
-# OS
+# =========================
+# Operating System
+# =========================
 .DS_Store
 Thumbs.db
+*.swp
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
+.dockerignore.local
+
+# =========================
+# Database
+# =========================
+*.db
+*.sqlite3
+
+# =========================
+# Backup Files
+# =========================
+backups/*
+!backups/.gitkeep
+
+# =========================
+# Temporary Files
+# =========================
+test.txt

@@ -1,7 +1,16 @@
-FROM nginx:alpine
+FROM python:3.12-slim
 
-COPY . /usr/share/nginx/html
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-EXPOSE 80
+WORKDIR /app
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY app/requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app/ .
+
+EXPOSE 5000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--threads", "4", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-", "app:app"]
